@@ -70,7 +70,7 @@ public class AbstractURLTestUtil {
         for (String ip : ipList) {
             System.out.println("---------------------------------------------------");
             String tmpHost = ip + "  " + host;
-            java.security.Security.setProperty("networkaddress.cache.ttl", "0");
+            java.security.Security.setProperty("networkaddress.cache.ttl", "0"); // 请dns缓存
             HostUtils.writeToHost(tmpHost);
             HostUtils.dumpHost();
             for(String url: urlList){

@@ -14,4 +14,8 @@ public class BaiduTestUtil {
     public static void testBaiduURL() throws Exception {
         AbstractURLTestUtil.switchHostTestURL("www.baidu.com", "http://www.baidu.com");
     }
+
+    public static void main(String[] args) throws Exception {
+        testBaiduURL();
+    }
 }
