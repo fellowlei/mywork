@@ -1,5 +1,7 @@
 package com.mark.pt.decorator;
 
+import com.mark.pt.bridge.Sourceable;
+
 /**
  * Created by lulei on 2016/5/26.
  */
