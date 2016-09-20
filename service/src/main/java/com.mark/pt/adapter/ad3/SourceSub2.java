@@ -10,8 +10,5 @@ public class SourceSub2 extends Wrapper2 {
     }
 
     public static void main(String[] args) {
-        Sourceable source1 = new SourceSub1();
-        source1.method1();
-        source1.method2();
     }
 }

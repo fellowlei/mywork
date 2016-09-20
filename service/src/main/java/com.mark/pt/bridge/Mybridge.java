@@ -11,8 +11,5 @@ public class Mybridge extends Bridge {
     public static void main(String[] args) {
         Bridge bridge = new Mybridge();
 
-        Sourceable source1 = new SourceSub1();
-        bridge.setSource(source1);
-        bridge.method1();
     }
 }
