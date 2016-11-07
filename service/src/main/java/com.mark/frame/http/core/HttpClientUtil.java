@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +98,7 @@ public class HttpClientUtil {
         System.out.println(response.getStatusLine());
         HttpEntity entity = response.getEntity();
         String result = EntityUtils.toString(entity, Charset.forName("UTF-8"));
-        System.out.println(result);
+//        System.out.println(result);
         return result;
     }
 
@@ -142,4 +143,15 @@ public class HttpClientUtil {
             e.printStackTrace();
         }
     }
+
+    public static void printLineByRegex(String msg,String regex) throws IOException {
+        BufferedReader bf =  new BufferedReader(new StringReader(msg));
+        String line = "";
+        while((line = bf.readLine()) != null){
+            if(line.matches(regex)){
+                System.out.println(line);
+            }
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 import java.util.List;
@@ -18,6 +19,14 @@ import java.util.Map;
  */
 public class AbstractHttpClient implements HttpMethod {
 
+    public static RequestConfig requestConfigWithTimeout(int timeoutInMilliseconds) {
+        return RequestConfig.copy(RequestConfig.DEFAULT)
+                .setSocketTimeout(timeoutInMilliseconds)
+                .setConnectTimeout(timeoutInMilliseconds)
+                .setConnectionRequestTimeout(timeoutInMilliseconds)
+                .build();
+    }
+
 
     public static void main(String[] args) throws Exception {
 //        HttpClientUtil.genMapCode();
@@ -27,7 +36,7 @@ public class AbstractHttpClient implements HttpMethod {
     public String doPost(String url, Map<String, String> headerMap, Map<String, String> formMap) {
         String result = null;
         try {
-            CloseableHttpClient httpclient = HttpClients.createDefault();
+            CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfigWithTimeout(2000)).build();
             HttpPost httpPost = new HttpPost(url);
 
             List<Header> headerList = HttpClientUtil.genHeaders(headerMap);
@@ -54,9 +63,13 @@ public class AbstractHttpClient implements HttpMethod {
         String result = null;
 
         try {
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            url = HttpClientUtil.appendParam(url, formMap);
+            CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfigWithTimeout(2000)).build();
+//            url = HttpClientUtil.appendParam(url, formMap);
             HttpGet httpGet = new HttpGet(url);
+
+            List<Header> headerList = HttpClientUtil.genHeaders(headerMap);
+            httpGet.setHeaders(headerList.toArray(new Header[headerList.size()]));
+
 
             CloseableHttpResponse response = httpclient.execute(httpGet);
 
