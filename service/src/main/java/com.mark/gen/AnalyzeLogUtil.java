@@ -27,6 +27,7 @@ public class AnalyzeLogUtil {
             }
             return skuids;
         }
+//        System.out.println(line);
         return "";
     }
 
@@ -47,6 +48,9 @@ public class AnalyzeLogUtil {
 //            System.out.println(line);
             line = line.replace("%2C",",");
             String skuids = match(line);
+            if(skuids == ""){
+                continue;
+            }
             String[] arr = skuids.split(",");
             Integer key = arr.length;
 

@@ -13,10 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by lulei on 2016/4/28.
@@ -152,6 +151,23 @@ public class HttpClientUtil {
                 System.out.println(line);
             }
         }
+    }
+
+    public static Date strToDate(String timeStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try {
+            Date date = sdf.parse(timeStr);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String longToDateStr(Long longTime) {
+        Date date = new Date(longTime);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return sdf.format(date);
     }
 
 }
