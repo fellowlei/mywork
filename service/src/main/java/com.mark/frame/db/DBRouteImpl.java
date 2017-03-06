@@ -1,10 +1,14 @@
 package com.mark.frame.db;
 
 
+import scala.Int;
+
 /**
  * Created by lulei on 2016/3/3.
  */
 public abstract class DBRouteImpl implements DBRoute {
+    private Integer tableCount = 0;
+    private Integer DBCount = 0;
 
     @Override
     public Integer getConnection(Integer id) {
@@ -13,6 +17,7 @@ public abstract class DBRouteImpl implements DBRoute {
         pos = pos % getDBCount();
         return pos;
     }
+
 
 
     @Override
@@ -32,6 +37,7 @@ public abstract class DBRouteImpl implements DBRoute {
     }
 
 
+
     public void test(Integer id) {
         checkId(id);
         System.out.print("id: " + id + ",db: " + getConnection(id) + ",table:" + getTableName(id));
@@ -44,7 +50,22 @@ public abstract class DBRouteImpl implements DBRoute {
         }
     }
 
-    public static void main(String[] args) {
-
+    @Override
+    public Integer getTableCount() {
+        return tableCount;
     }
+
+    public void setTableCount(Integer tableCount) {
+        this.tableCount = tableCount;
+    }
+
+    @Override
+    public Integer getDBCount() {
+        return DBCount;
+    }
+
+    public void setDBCount(Integer DBCount) {
+        this.DBCount = DBCount;
+    }
+
 }
