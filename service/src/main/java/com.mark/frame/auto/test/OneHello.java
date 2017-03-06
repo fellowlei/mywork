@@ -6,7 +6,7 @@ package com.mark.frame.auto.test;
 public class OneHello implements Hello {
     @Override
     public void sayHello() {
-//        System.out.println("hello 1");
-        throw new RuntimeException("run error");
+        System.out.println("hello 1");
+//        throw new RuntimeException("run error");
     }
 }
