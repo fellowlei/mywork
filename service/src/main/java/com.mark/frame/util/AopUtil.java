@@ -31,12 +31,25 @@ public class AopUtil implements InvocationHandler {
         return (T) Proxy.newProxyInstance(AopUtil.class.getClassLoader(),obj.getClass().getInterfaces(),aopUtil);
     }
 
+    /**
+     * 动态代理
+     */
     public static void test(){
         Worker worker = AopUtil.getProxy(new DefaultWorker());
         worker.start();
     }
 
+    /**
+     * 动态代理叠加
+     */
+    public static void test2(){
+        Worker worker = AopUtil.getProxy(new DefaultWorker());
+        Worker worker2 = AopUtil.getProxy(worker);
+        Worker worker3 = AopUtil.getProxy(worker2);
+        worker3.start();
+    }
+
     public static void main(String[] args) {
-        test();
+        test2();
     }
 }

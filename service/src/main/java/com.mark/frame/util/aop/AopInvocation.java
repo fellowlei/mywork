@@ -18,10 +18,12 @@ public class AopInvocation implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        // 无侵入动态代理 before
         if(object instanceof  AopMethod){
             ((AopMethod) object).before(object);
         }
         Object result = method.invoke(object, args);
+        // 无侵入动态代理 before
         if(object instanceof  AopMethod){
             ((AopMethod) object).after(object);
         }
