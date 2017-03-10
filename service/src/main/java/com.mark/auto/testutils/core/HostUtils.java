@@ -34,8 +34,18 @@ public class HostUtils {
         fileWriter.close();
     }
 
+    /**
+     * switch host
+     * @param host
+     * @throws IOException
+     */
+    public static  void switchHost(String host) throws IOException {
+        java.security.Security.setProperty("networkaddress.cache.ttl", "0");
+        writeToHost(host);
+    }
+
     public static boolean isHost(String host) {
-        if (host != null && !host.trim().equals("") && !host.trim().startsWith("#")) { // è¿‡æ»¤æ³¨é‡Š
+        if (host != null && !host.trim().equals("") && !host.trim().startsWith("#")) { // ¹ýÂË×¢ÊÍ
             return true;
         } else {
             return false;

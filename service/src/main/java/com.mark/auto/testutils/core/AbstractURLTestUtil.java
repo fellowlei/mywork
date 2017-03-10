@@ -1,5 +1,7 @@
 package com.mark.auto.testutils.core;
 
+import com.mark.auto.testutils.core.v2.HttpClientUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,7 +17,7 @@ import java.util.List;
  */
 public class AbstractURLTestUtil {
     /**
-     * è¶…æ—¶æ—¶é—´
+     * ³¬Ê±Ê±¼ä
      *
      * @param timeoutInMilliseconds
      * @return
@@ -29,7 +31,7 @@ public class AbstractURLTestUtil {
     }
 
     /**
-     * æµ‹è¯•url
+     * ²âÊÔurl
      *
      * @param url
      */
@@ -38,12 +40,39 @@ public class AbstractURLTestUtil {
         HttpGet httpGet = new HttpGet(url);
         try {
             CloseableHttpResponse response = httpclient.execute(httpGet);
-            System.out.println(response.getStatusLine() + ":" + EntityUtils.toString(response.getEntity()));
+            System.out.println(response.getStatusLine() + ":" + EntityUtils.toString(response.getEntity(),"UTF-8"));
             return true;
         } catch (Exception e) {
             System.err.println("test URL error: " + e + ",url" + url);
             return false;
         }
+    }
+
+    public static boolean testURLV2(String url){
+        String result = HttpClientUtil.getInstance().sendHttpGet(url);
+        System.out.println(result);
+        if(StringUtils.isNotEmpty(result)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static  void switchHostTestURLV2(String host, String url)  throws Exception{
+        List<String> ipList = HostUtils.fileToList("d:/demo/ip.txt");
+        List<String> errList = new ArrayList<String>();
+        for (String ip : ipList) {
+            System.out.println("---------------------------------------------------");
+            String tmpHost = ip + "  " + host;
+            HostUtils.switchHost(tmpHost);
+            HostUtils.dumpHost();
+            boolean testResult = testURLV2(url);
+            if (!testResult) {
+                errList.add(ip);
+            }
+            Thread.sleep(500);
+        }
+        dumpErrorMsg(errList);
     }
 
     public static void switchHostTestURL(String host, String url) throws Exception {
@@ -70,7 +99,7 @@ public class AbstractURLTestUtil {
         for (String ip : ipList) {
             System.out.println("---------------------------------------------------");
             String tmpHost = ip + "  " + host;
-            java.security.Security.setProperty("networkaddress.cache.ttl", "0"); // è¯·dnsç¼“å­˜
+            java.security.Security.setProperty("networkaddress.cache.ttl", "0");
             HostUtils.writeToHost(tmpHost);
             HostUtils.dumpHost();
             for(String url: urlList){
