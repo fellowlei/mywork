@@ -101,7 +101,7 @@ public class SessionHttpUtil {
         }
     }
 
-    private static List<NameValuePair> toNameValuePairList(String parameters) {
+    public static List<NameValuePair> toNameValuePairList(String parameters) {
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         String[] paramList = parameters.split("&");
         for (String param : paramList) {
