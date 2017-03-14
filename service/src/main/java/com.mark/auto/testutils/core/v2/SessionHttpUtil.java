@@ -50,8 +50,8 @@ public class SessionHttpUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        loginPost("http://ssa.jd.com/sso/login?ReturnUrl=http%3A%2F%2Ferp.jd.com%2F", "username=lulei11&password=Lenovo@44");
-        get("http://adm.cache.jd.com/clusters/list.json?clusterName=pf&dept1Name=&dept2Name=&ip=&port=&page=1&rows=10&sort=id&order=desc");
+        loginPost("http://test.com/login.action", "username=mark&password=mark");
+        get("http://test.com/manager");
     }
 
     public static Map<String, String> genHeader() {
