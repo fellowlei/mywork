@@ -21,8 +21,6 @@ public class AdwordTestUtil implements UserHttpMethod {
         map.put("Accept-Encoding", "gzip, deflate, sdch");
         map.put("Accept-Language", "zh-CN,zh;q=0.8");
         map.put("Connection", "keep-alive");
-        map.put("Host", "ad.3.cn");
-        map.put("Referer", "http://search.jd.com/Search?keyword=%E5%BE%AE%E6%9C%8D%E5%8A%A1&enc=utf-8&pvid=qwl5ivni.r3c6a2");
         map.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36");
         return map;
 
@@ -39,7 +37,7 @@ public class AdwordTestUtil implements UserHttpMethod {
 
     @Override
     public String getURL() {
-        return "http://ad.3.cn/ads/mgets";
+        return "http://test.url";
     }
 
     public static void dumpAdword(String result) throws ParseException {

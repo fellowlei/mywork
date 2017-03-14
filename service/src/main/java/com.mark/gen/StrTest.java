@@ -71,28 +71,6 @@ public class StrTest {
     }
 
     public static void stringTest() throws Exception {
-//        String s = "http://prr.jd.local/queryMarginIn?pin=user3&token=check&origin=1&skuList=[{%22skuid%22:%22100010%22,%22price%22:%2280%22},{%22skuid%22:%22100011%22,%22price%22:%22120%22}]";
-        String json = URLEncoder.encode("[{\"skuid\":\"100010\",\"price\":\"80\"},{\"skuid\":\"100011\",\"price\":\"120\"}]", "UTF-8");
-        System.out.println(json);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("http://prr.jd.local/queryMarginIn?pin=user3&token=check&origin=1&skuList=");
-        sb.append(json);
-        System.out.println(sb.toString());
-
-        //http://prr.jd.local/queryMarginIn?pin=user3&token=check&origin=1&skuList=[{"skuid":"100010","price":"80"},{"skuid":"100011","price":"120"}]
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        List<Object> list = new ArrayList<Object>();
-//        Map<String, Object> map2 = new HashMap<String, Object>();
-//        map2.put("skuid", "100010");
-//        map2.put("price", "80");
-//        list.add(map2);
-//        map.put("pin", "user3");
-//        map.put("token", "check");
-//        map.put("skuList", list);
-//        System.out.println(FastJsonUtils.toJson(map));
-
-//        URL url = new URL("http://prr.jd.local/addIn?pin=user3&token=check&origin=1&skuList=[{%22skuid%22:%22100010%22,%22price%22:%22100%22},{%22skuid%22:%22100011%22,%22price%22:%22200%22}]");
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     }
 }
