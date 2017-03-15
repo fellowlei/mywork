@@ -58,6 +58,32 @@ public class SessionHttpUtil {
         return map;
     }
 
+    public static String loginPost(String url, Map<String,String> paramMap) throws IOException{
+        HttpPost httpPost = new HttpPost(url);
+        List<NameValuePair> nvps = toListParam(paramMap);
+        httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+
+        List<Header> headerList = HttpClientUtil.genHeaders(genHeader());
+        httpPost.setHeaders(headerList.toArray(new Header[headerList.size()]));
+        CloseableHttpResponse response = httpClient.execute(httpPost, context);
+
+        try {
+            dumpCookies();
+            String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+            return result;
+        } finally {
+            response.close();
+        }
+    }
+
+    private static List<NameValuePair> toListParam(Map<String, String> paramMap) {
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        for(String key : paramMap.keySet()){
+            nvps.add(new BasicNameValuePair(key,paramMap.get(key)));
+        }
+        return nvps;
+    }
+
 
     public static String loginPost(String url, String params) throws IOException {
         HttpPost httpPost = new HttpPost(url);
