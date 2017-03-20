@@ -89,7 +89,7 @@ public class DefaultCookieUtil {
         httpGet.setHeader(new BasicHeader("Cookie",COOKIE_VAL)); // 设置Cookie
         try {
             String result = EntityUtils.toString(response.getEntity(), "UTF-8");
-            System.out.println(result);
+//            System.out.println(result);
             return result;
         } finally {
             response.close();
