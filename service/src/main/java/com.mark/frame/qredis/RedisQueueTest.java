@@ -75,7 +75,6 @@ public class RedisQueueTest {
         Jedis jedis = RedisUtil.getJedis();
         for (int i = 0; i < 5; i++) {
             jedis.lpush("news", atomicInteger.incrementAndGet() + "");
-
         }
         RedisUtil.returnResource(jedis);
         Thread.sleep(5000);
