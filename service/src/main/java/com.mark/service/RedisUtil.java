@@ -16,7 +16,7 @@ public class RedisUtil {
         config.setMaxIdle(200);
         config.setMaxWaitMillis(1000);
         config.setTestOnBorrow(true);
-        jedisPool = new JedisPool(config, "192.168.10.1", 6379, 1000);
+        jedisPool = new JedisPool(config, "192.168.81.134", 6379, 1000);
     }
 
     public synchronized static Jedis getJedis() {
@@ -39,5 +39,9 @@ public class RedisUtil {
         }
     }
 
+    public static void main(String[] args) {
+       Jedis jedis= getJedis();
+        System.out.println(jedis.get("a"));
+    }
 
 }

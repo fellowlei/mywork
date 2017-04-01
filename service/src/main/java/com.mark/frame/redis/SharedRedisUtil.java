@@ -14,9 +14,9 @@ public class SharedRedisUtil {
     }
 
     public RedisUtil getRedisUtil(String key) {
-//       Integer hash =  MurmurHash.hash32(key.getBytes(), key.length());
-        Long hash = MurmurHash.hash64(key.getBytes(), key.length());
-        Integer index = pool.size() % hashCode();
+       Integer hash =  MurmurHash.hash32(key.getBytes(), key.length());
+//        Long hash = MurmurHash.hash64(key.getBytes(), key.length());
+        Integer index =  hash % pool.size();
         return pool.get(index);
     }
 

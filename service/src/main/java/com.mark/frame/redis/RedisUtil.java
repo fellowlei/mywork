@@ -28,6 +28,10 @@ public class RedisUtil {
         }
     }
 
+    public JedisPool getPool(){
+        return pool;
+    }
+
 
     public String get(String key) {
         Jedis jedis = null;
@@ -40,7 +44,6 @@ public class RedisUtil {
             e.printStackTrace();
         } finally {
             pool.returnResource(jedis);
-            jedis.close();
         }
         return value;
     }
@@ -58,6 +61,16 @@ public class RedisUtil {
         } finally {
             pool.returnResource(jedis);
         }
+    }
+
+    public static void main(String[] args) {
+        RedisUtil redisUtil =  new RedisUtil("192.168.81.134", 6379);
+        System.out.println(redisUtil.getPool().getResource().info());
+        System.out.println(redisUtil.get("a"));
+
+        Jedis jedis = new JedisPool("192.168.81.134", 6379).getResource();
+        jedis.set("a","a");
+        System.out.println(jedis.get("a"));
     }
 
 }
