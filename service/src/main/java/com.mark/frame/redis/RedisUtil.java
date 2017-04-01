@@ -10,8 +10,12 @@ import redis.clients.jedis.JedisPoolConfig;
 public class RedisUtil {
     private JedisPool pool = null;
     private Integer timeout = 1000 * 50;
+    private String ip;
+    private Integer port;
 
     public RedisUtil(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
         if (pool == null) {
             JedisPoolConfig config = new JedisPoolConfig();
             config.setMaxTotal(500);
@@ -22,14 +26,12 @@ public class RedisUtil {
         }
     }
 
-    public RedisUtil(JedisPoolConfig config, String ip, int port) {
-        if (pool == null) {
-            pool = new JedisPool(config, ip, port, timeout);
-        }
-    }
-
     public JedisPool getPool(){
         return pool;
+    }
+
+    public String dumpIp(){
+        return ip + ":" + port;
     }
 
 
@@ -68,9 +70,9 @@ public class RedisUtil {
         System.out.println(redisUtil.getPool().getResource().info());
         System.out.println(redisUtil.get("a"));
 
-        Jedis jedis = new JedisPool("192.168.81.134", 6379).getResource();
-        jedis.set("a","a");
-        System.out.println(jedis.get("a"));
+//        Jedis jedis = new JedisPool("192.168.81.134", 6379).getResource();
+//        jedis.set("a","a");
+//        System.out.println(jedis.get("a"));
     }
 
 }
