@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by lulei on 2017/4/1.
  */
-public class SharedRedisUtil {
+public class ShardRedisUtil {
     private List<RedisUtil> pool = new ArrayList<RedisUtil>();
 
     public void init() {
@@ -48,7 +48,7 @@ public class SharedRedisUtil {
     }
 
     public static void main(String[] args) {
-        SharedRedisUtil redisUtil = new SharedRedisUtil();
+        ShardRedisUtil redisUtil = new ShardRedisUtil();
         redisUtil.init();
         redisUtil.set("name","mark");
         redisUtil.getRedisUtilTest("name");
@@ -56,7 +56,7 @@ public class SharedRedisUtil {
     }
 
     public static void testHash(){
-        SharedRedisUtil redisUtil = new SharedRedisUtil();
+        ShardRedisUtil redisUtil = new ShardRedisUtil();
         redisUtil.init();
         for(int i=0; i<10; i++){
             redisUtil.getRedisUtilTest(i+"");
