@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class AbstractURLTestUtil {
     /**
-     * ³¬Ê±Ê±¼ä
+     * è¶…æ—¶æ—¶é—´
      *
      * @param timeoutInMilliseconds
      * @return
@@ -31,7 +31,7 @@ public class AbstractURLTestUtil {
     }
 
     /**
-     * ²âÊÔurl
+     * æµ‹è¯•url
      *
      * @param url
      */

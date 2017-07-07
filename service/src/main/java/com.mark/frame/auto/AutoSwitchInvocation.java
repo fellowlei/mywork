@@ -23,7 +23,7 @@ public class AutoSwitchInvocation implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println(count.incrementAndGet());
-        // »ñÈ¡¼ÆÊ±Æ÷,Ã¿¸ö½Ó¿ÚÃû£¬Ò»¸ö¼ÆÊ±Æ÷
+        // èŽ·å–è®¡æ—¶å™¨,æ¯ä¸ªæŽ¥å£åï¼Œä¸€ä¸ªè®¡æ—¶å™¨
         AutoSwitch autoSwitch = null;
         if(hashMap.containsKey(method.getName())){
            autoSwitch = hashMap.get(method.getName());
@@ -34,8 +34,8 @@ public class AutoSwitchInvocation implements InvocationHandler {
 
 
         Object result = null;
-        if(autoSwitch.fail.get() >= 3){ // Ê§°Ü3´Îµ÷ÓÃ±¸
-            if(autoSwitch.failTimeout.get() < System.currentTimeMillis()){ // ³¬¹ý10Ãë£¬×Ô¶¯µ÷ÓÃÖ÷
+        if(autoSwitch.fail.get() >= 3){ // å¤±è´¥3æ¬¡è°ƒç”¨å¤‡
+            if(autoSwitch.failTimeout.get() < System.currentTimeMillis()){ // è¶…è¿‡10ç§’ï¼Œè‡ªåŠ¨è°ƒç”¨ä¸»
                 autoSwitch.fail.set(0);
             }
             System.out.println("call slave");
@@ -49,7 +49,7 @@ public class AutoSwitchInvocation implements InvocationHandler {
     }
 
     private Object invokeMasterInstance(Method method, Object[] args,AutoSwitch autoSwitch) {
-        if(autoSwitch.spendTime.get() < System.currentTimeMillis()){ // 10ÃëÄÚµ÷ÓÃ3´Î
+        if(autoSwitch.spendTime.get() < System.currentTimeMillis()){ // 10ç§’å†…è°ƒç”¨3æ¬¡
             System.out.println("set spend time");
             autoSwitch.spendTime.set(System.currentTimeMillis() + 10 * 1000);
             autoSwitch.fail.set(0);
@@ -61,8 +61,8 @@ public class AutoSwitchInvocation implements InvocationHandler {
             log.error(e.getMessage());
 //            e.printStackTrace();
             autoSwitch.fail.incrementAndGet();
-            if(autoSwitch.fail.get() >= 3){ // Ê§°Ü3´Îµ÷ÓÃ±¸
-                autoSwitch.failTimeout.set(System.currentTimeMillis() + 10 * 1000); // 10Ãë
+            if(autoSwitch.fail.get() >= 3){ // å¤±è´¥3æ¬¡è°ƒç”¨å¤‡
+                autoSwitch.failTimeout.set(System.currentTimeMillis() + 10 * 1000); // 10ç§’
             }
             result = invokeSlaveInstance(method, args);
         }

@@ -45,7 +45,7 @@ public class HostUtils {
     }
 
     public static boolean isHost(String host) {
-        if (host != null && !host.trim().equals("") && !host.trim().startsWith("#")) { // ¹ýÂË×¢ÊÍ
+        if (host != null && !host.trim().equals("") && !host.trim().startsWith("#")) { // è¿‡æ»¤æ³¨é‡Š
             return true;
         } else {
             return false;
