@@ -1,6 +1,8 @@
 package com.mark.gen;
 
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +14,13 @@ import java.util.Map;
  */
 public class TimeUtil {
     public static void main(String[] args) {
-//        System.out.println(System.currentTimeMillis()/1000);
+        System.out.println(System.currentTimeMillis()/1000);
+        NumberFormat nf = NumberFormat.getInstance();
+        System.out.println(nf.format(new BigDecimal("10.00")));
+        System.out.println(nf.format(new BigDecimal("10.10")));
+        System.out.println(nf.format(new BigDecimal("10.010")));
+        System.out.println(nf.format(new BigDecimal("11000.0010")));
+        System.out.println(PriceFormat.formatPrice(new BigDecimal("11000.0010").toString()));
 
     }
 
