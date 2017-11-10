@@ -1,6 +1,6 @@
 package com.mark.frame.http.core.v2;
 
-import com.mark.frame.http.core.HttpClientUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.*;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
@@ -12,6 +12,7 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.*;
 import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -29,6 +30,7 @@ public class SessionHttpUtil {
     public static HttpClientContext context;
     public static CookieStore cookieStore;
     public static RequestConfig requestConfig;
+    public static String HOST = "";
 
     static {
         init();
@@ -54,8 +56,19 @@ public class SessionHttpUtil {
 
     public static Map<String, String> genHeader() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+        map.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0");
+        if(StringUtils.isNoneEmpty(HOST)){
+            map.put("HOST",HOST);
+        }
         return map;
+    }
+
+    public static List<Header> genHeaderList(Map<String, String> headerMap) {
+        List<Header> list = new ArrayList<Header>();
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            list.add(new BasicHeader(entry.getKey(), entry.getValue()));
+        }
+        return list;
     }
 
     public static String loginPost(String url, Map<String,String> paramMap) throws IOException{
@@ -63,7 +76,7 @@ public class SessionHttpUtil {
         List<NameValuePair> nvps = toListParam(paramMap);
         httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
 
-        List<Header> headerList = HttpClientUtil.genHeaders(genHeader());
+        List<Header> headerList = genHeaderList(genHeader());
         httpPost.setHeaders(headerList.toArray(new Header[headerList.size()]));
         CloseableHttpResponse response = httpClient.execute(httpPost, context);
 
@@ -90,7 +103,7 @@ public class SessionHttpUtil {
         List<NameValuePair> nvps = toNameValuePairList(params);
         httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
 
-        List<Header> headerList = HttpClientUtil.genHeaders(genHeader());
+        List<Header> headerList = genHeaderList(genHeader());
         httpPost.setHeaders(headerList.toArray(new Header[headerList.size()]));
         CloseableHttpResponse response = httpClient.execute(httpPost, context);
 
@@ -108,6 +121,20 @@ public class SessionHttpUtil {
         HttpGet httpGet = new HttpGet(url);
 //        List<Header> headerList = com.mark.frame.http.core.HttpClientUtil.genHeaders(genHeader());
 //        httpGet.setHeaders(headerList.toArray(new Header[headerList.size()]));
+        CloseableHttpResponse response = httpClient.execute(httpGet, context);
+        String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+        try {
+//            dumpCookies();
+            return result;
+        } finally {
+            response.close();
+        }
+    }
+
+    public static String get(String url,Map<String,String> headerMap) throws IOException {
+        HttpGet httpGet = new HttpGet(url);
+        List<Header> headerList = genHeaderList(headerMap);
+        httpGet.setHeaders(headerList.toArray(new Header[headerList.size()]));
         CloseableHttpResponse response = httpClient.execute(httpGet, context);
         String result = EntityUtils.toString(response.getEntity(), "UTF-8");
         try {

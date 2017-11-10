@@ -1,6 +1,7 @@
 package com.mark.frame.http.core.v2;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by lulei on 2017/3/14.
@@ -18,9 +19,21 @@ public class LoginHttpUtil {
         return result;
     }
 
+    public static String post(String url, Map<String,String> paramMap) throws IOException {
+        String result = SessionHttpUtil.loginPost(url, paramMap);
+//        System.out.println(result);
+        return result;
+    }
+
     public static String get(String url) throws IOException {
         String result = SessionHttpUtil.get(url);
-        System.out.println(result);
+//        System.out.println(result);
+        return result;
+    }
+
+    public static String get(String url,Map<String,String> headerMap) throws IOException {
+        String result = SessionHttpUtil.get(url,headerMap);
+//        System.out.println(result);
         return result;
     }
 
