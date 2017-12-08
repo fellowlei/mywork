@@ -9,6 +9,7 @@ public class User implements Serializable{
     private Integer id;
     private String name;
     private String password;
+    private User subUser;
 
     public User(Integer id, String name, String password) {
         this.id = id;
@@ -41,5 +42,13 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public User getSubUser() {
+        return subUser;
+    }
+
+    public void setSubUser(User subUser) {
+        this.subUser = subUser;
     }
 }
