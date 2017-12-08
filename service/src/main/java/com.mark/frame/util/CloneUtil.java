@@ -3,10 +3,7 @@ package com.mark.frame.util;
 import com.alibaba.fastjson.JSON;
 import com.mark.domain.User;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 /**
  * Created by lulei on 2017/12/8.
@@ -38,6 +35,27 @@ public class CloneUtil {
         ByteArrayInputStream bi =new ByteArrayInputStream(bo.toByteArray());
         ObjectInputStream oi = new ObjectInputStream(bi);
         return oi.readObject();
+    }
+
+    public static <T extends Serializable> T clone3(T obj){
+
+        T clonedObj = null;
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(obj);
+            oos.close();
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            clonedObj = (T) ois.readObject();
+            ois.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return clonedObj;
     }
 
     public static Object deepClone2(Object obj) throws Exception {
