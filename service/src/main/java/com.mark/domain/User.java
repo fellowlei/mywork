@@ -51,4 +51,14 @@ public class User implements Serializable{
     public void setSubUser(User subUser) {
         this.subUser = subUser;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", subUser=" + subUser +
+                '}';
+    }
 }
