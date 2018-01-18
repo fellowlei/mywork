@@ -1,6 +1,7 @@
 package com.mark.nt.kf.demo;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.kafka.clients.consumer.CommitFailedException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -40,6 +41,12 @@ public class KafkaDemoConsumer {
                     }
                     countMap.put(record.value(),count);
                     System.out.println(JSON.toJSONString(countMap));
+                }
+
+                try {
+                    consumer.commitAsync();
+                }catch (CommitFailedException e){
+                    e.printStackTrace();
                 }
             }
         }catch (Exception e){
