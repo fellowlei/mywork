@@ -1,7 +1,7 @@
 package com.mark.frame.util.debug;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,8 +27,8 @@ public class DebugUtil {
         }
     }
 
-    public DebugBean get(){
-        DebugBean debugBean = blockingQueue.poll();
+    public DebugBean get() throws InterruptedException {
+        DebugBean debugBean = blockingQueue.take();
         return debugBean;
     }
 
@@ -38,7 +38,7 @@ public class DebugUtil {
             public void run() {
                 while(!stop){
                     try {
-                        DebugBean debugBean = blockingQueue.poll();
+                        DebugBean debugBean = blockingQueue.take();
                         if(debugMap.size() > 5000){
                             debugMap = new ConcurrentHashMap<String, String>();
                             log.error("debugMap size > 5000,resize it to 0!");
