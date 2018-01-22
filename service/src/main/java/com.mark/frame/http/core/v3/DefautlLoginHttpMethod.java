@@ -9,24 +9,24 @@ import java.util.Map;
  */
 public class DefautlLoginHttpMethod  implements LoginHttpMethod {
 
-    private AbstractLoginHttpMethod abstractLoginHttpMethod = new AbstractLoginHttpMethod();
+    private LoginHttpMethod loginHttpMethod = new AbstractLoginHttpMethod();
     @Override
     public String post(String url, Map<String, String> paramMap) throws IOException {
-        return abstractLoginHttpMethod.post(url, paramMap);
+        return loginHttpMethod.post(url, paramMap);
     }
 
     @Override
     public String post(String url, String params) throws IOException {
-        return abstractLoginHttpMethod.post(url, params);
+        return loginHttpMethod.post(url, params);
     }
 
     @Override
     public String get(String url) throws IOException {
-        return abstractLoginHttpMethod.get(url);
+        return loginHttpMethod.get(url);
     }
 
     @Override
     public String get(String url, Map<String, String> headerMap) throws IOException {
-        return abstractLoginHttpMethod.get(url, headerMap);
+        return loginHttpMethod.get(url, headerMap);
     }
 }
