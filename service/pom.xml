@@ -209,15 +209,13 @@
             <version>0.6.12</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
             <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/aspectj/aspectjweaver -->
-        <dependency>
-            <groupId>aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
         </dependency>
+
 
     </dependencies>
 
