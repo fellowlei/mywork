@@ -1,26 +1,33 @@
-compare system
+#compare system
 process
 log -> queue -> worker access
 if fail -> fail queue -> fail worker access
-
-
 worker access
 prepare
 querynew
 queryold
 compare
 
-
 statistic
 all num
 fail num
 success num
 ==================================================================
-use analyze
+#use analyze
 userid produceid rank
 pin  product  promo price
 pin -> product
 product -> promo -> price
 
 ==================================================================
+# stream
+flume -> kafka -> spark stream -> redis
+
+=================================================================
+# 分库分表
+mid = id % (dsize * tsize)
+didx = mid/dsize
+tidx = mid%tsize
+
+
 
