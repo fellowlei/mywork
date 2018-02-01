@@ -1,8 +1,6 @@
 package com.mark.frame.db;
 
 
-import scala.Int;
-
 /**
  * Created by lulei on 2016/3/3.
  */
