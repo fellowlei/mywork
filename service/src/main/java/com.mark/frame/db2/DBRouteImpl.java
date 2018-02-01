@@ -24,6 +24,9 @@ public class DBRouteImpl implements DBRoute {
 
     public static void main(String[] args) {
         DBRouteImpl dbRoute = new DBRouteImpl();
+        for(int i=0; i<10; i++){
+            System.out.println(dbRoute.getDIndex(i) + ":" + dbRoute.getTIndex(i));
+        }
 
     }
 }
