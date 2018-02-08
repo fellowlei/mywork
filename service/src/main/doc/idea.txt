@@ -20,8 +20,9 @@ pin -> product
 product -> promo -> price
 
 ==================================================================
-# stream
-flume -> kafka -> spark stream -> redis
+# stream process
+flume -> kafka -> spark stream -> redis    <- app
+                               -> mysql
 
 =================================================================
 # 分库分表
