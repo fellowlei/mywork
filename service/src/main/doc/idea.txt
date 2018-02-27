@@ -30,5 +30,16 @@ mid = id % (dsize * tsize)
 didx = mid/dsize
 tidx = mid%tsize
 
+==================================================================
+# storm pattern
+#数据流处理
+kafka -> spout -> bolt(filter) -> bolt(redis) -> bolt(mysql) -> bolt(kafka) -> bolt(es)
 
+#数据流通过算法处理
+kafka -> spout -> bolt(filter) -> bolt(算法1) -> bolt(算法2) -> bolt(算法3)
+
+=====================================================================
+#server rpc
+#系统交互
+app -> model(序列化) <- app2 -> model2（序列化） <- app3
 
